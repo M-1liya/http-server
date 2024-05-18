@@ -15,12 +15,17 @@ hv::HttpService* Router::GetHttpService() {
 }
 
 void Router::RegisterRoutes() {
+
+    
     _router->POST("/signup", [this](HttpRequest *req, HttpResponse *resp) {
         hv::Json request = req->GetJson();
 
         std::string username;
         std::string email;
         std::string password;
+
+        
+        std::cout << request << std::endl;
 
         try {
             username = request["username"];

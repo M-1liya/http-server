@@ -3,7 +3,7 @@
 #include "Router.hpp"
 
 int main() {
-    std::cout << "Hello, world" << std::endl;
+    std::cout << "Server has been started" << std::endl;
 
     Router router = Router();
 
