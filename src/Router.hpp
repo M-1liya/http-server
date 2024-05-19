@@ -3,11 +3,13 @@
 
 #include "HttpService.h"
 #include "Storage.hpp"
+#include "auth/BasicAuth.hpp"
 
 class Router {
 private:
     std::unique_ptr<hv::HttpService> _router;
     Storage _storage = Storage();
+    BasicAuth authorizator = BasicAuth();
 
     void RegisterRoutes();
 public:

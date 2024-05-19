@@ -115,7 +115,55 @@ void Router::RegisterRoutes() {
     });
 
     _router->PATCH("/users/{guid}", [this](HttpRequest *req, HttpResponse *resp) {
+
+        hv::Json request = req->GetJson();
+
+        std::string authorization;        
+        std::cout << request << std::endl;
+
+        //Getting authoriztaion string
+        try 
+        {
+            authorization = request["authoriztaion"];
+        }
+        catch (const std::exception& e) {
+            hv::Json response
+            {
+                { "message", "Need autoriztaion field for patch anything" }
+            };
+            resp->Json(response);
+            return 400;
+        }
+        std::cout << "Authorization string = " << authorization << std::endl;
+
+        User* ReqUser;
+        //Verification of autoriztaion
+        try
+        {
+            ReqUser = authorizator.Authorize(authorization, _storage);
+            if(ReqUser == nullptr)
+            {
+                hv::Json response
+                {
+                    { "message", "invalid username or password" }
+                };
+                resp->Json(response);
+                return 400;
+            }
+        }
+        catch(const std::exception& e)
+        {
+            hv::Json response
+            {
+                { "message", "invalid username or password" }
+            };
+            resp->Json(response);
+            return 400;
+        }
+        
+
         std::string guid = req->GetParam("guid");
+        std::cout << "Giud: " << guid << std::endl;
 
         if (guid == hv::empty_string) {
             hv::Json response
@@ -126,7 +174,18 @@ void Router::RegisterRoutes() {
             return 400;
         }
 
-        hv::Json request = req->GetJson();
+
+        if(_storage.GetUserGuidByUsername(ReqUser->getUsername()) != guid && !ReqUser->IsRoot())
+        {
+            hv::Json response
+            {
+                { "message", "Not enough rights" }
+            };
+            resp->Json(response);
+            return 400;
+        }
+
+        
 
         std::string username;
         std::string email;

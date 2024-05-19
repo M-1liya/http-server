@@ -24,7 +24,9 @@ public:
 
     std::string CreateUser(User& user);
     std::map<std::string, User>* GetUsers();
-    User* GetUserByGuid(std::string& guid);
+    User* GetUserByGuid(const std::string& guid);
+    std::string GetUserGuidByUsername(const std::string& username);
+    User* GetUserByUsername(const std::string& username);
     bool UpdateUser(std::string& guid, const std::string& username, const std::string& email, const std::string& password);
     bool DeleteUser(std::string& guid);
 };
