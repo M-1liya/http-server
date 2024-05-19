@@ -1,5 +1,6 @@
 #include "Storage.hpp"
 #include <map>
+#include <iostream>
 
 Storage::Storage() {
     _storage = std::map<std::string, User>();
@@ -62,18 +63,29 @@ std::string Storage::GetUserGuidByUsername(const std::string &username)
         return (it->first);
     }
 
+
+
+
     return nullptr;
 }
 
 User* Storage::GetUserByUsername(const std::string& uName) {
     std::lock_guard<std::mutex> guard(_mtx);
+    User tmpUser;
 
-    auto it = _storage.find(uName);
-    if (it != _storage.end()) {
-        return &(it->second);
+    for(std::pair<std::string, User> pair : _storage)
+    {
+        tmpUser = pair.second;
+            std::cout << "!!! NasheL !!!" << std::endl;
+        if(tmpUser.getUsername() == uName)
+        {
+            break;
+        }
+        std::cout << tmpUser.getUsername() << "!=" << uName << std::endl;
     }
 
-    return nullptr;
+    std::cout << tmpUser.getUsername() << std::endl;
+    return &tmpUser;
 }
 
 bool Storage::UpdateUser(std::string& guid, const std::string& username, const std::string& email, const std::string& password) {
