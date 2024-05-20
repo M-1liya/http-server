@@ -5,7 +5,7 @@
 Storage::Storage() {
     _storage = std::map<std::string, User>();
 
-    User rootUser = User("root", "root@root.ru", "root");
+    User rootUser =  User("root", "root@root.ru", "root");
     rootUser.ChangeRole(true); //Is root?
 
     std::lock_guard<std::mutex> guard(_mtx);
@@ -58,9 +58,15 @@ User* Storage::GetUserByGuid(const std::string& guid) {
 
 std::string Storage::GetUserGuidByUsername(const std::string &username)
 {
-    auto it = _storage.find(username);
-    if (it != _storage.end()) {
-        return (it->first);
+    for(auto& [guid, user] : _storage)
+    {
+
+        if(user.getUsername() == username)
+        {
+            std::cout << "!!! NasheL GUID!!!" << std::endl;
+            return guid;
+        }
+        std::cout << user.getUsername() << "!=" << username << std::endl;
     }
 
 
@@ -71,21 +77,21 @@ std::string Storage::GetUserGuidByUsername(const std::string &username)
 
 User* Storage::GetUserByUsername(const std::string& uName) {
     std::lock_guard<std::mutex> guard(_mtx);
-    User tmpUser;
 
-    for(std::pair<std::string, User> pair : _storage)
+
+    for(auto& [guid, user] : _storage)
     {
-        tmpUser = pair.second;
-            std::cout << "!!! NasheL !!!" << std::endl;
-        if(tmpUser.getUsername() == uName)
+
+        if(user.getUsername() == uName)
         {
-            break;
+            std::cout << "!!! NasheL !!!" << std::endl;
+            return &user;
         }
-        std::cout << tmpUser.getUsername() << "!=" << uName << std::endl;
+        std::cout << user.getUsername() << "!=" << uName << std::endl;
     }
 
-    std::cout << tmpUser.getUsername() << std::endl;
-    return &tmpUser;
+    std::cout << "Ne nashel" << std::endl;
+    return nullptr;
 }
 
 bool Storage::UpdateUser(std::string& guid, const std::string& username, const std::string& email, const std::string& password) {

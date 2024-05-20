@@ -2,8 +2,10 @@
 #define HTTP_SERVER_STORAGE_HPP
 
 #include "User.hpp"
+#include <iostream>
 #include <map>
 #include <mutex>
+#include <memory>
 
 class Storage {
 private:

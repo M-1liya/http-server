@@ -136,7 +136,7 @@ void Router::RegisterRoutes() {
         }
         std::cout << "Authorization string = " << authorization << std::endl;
 
-        User* ReqUser;
+        std::shared_ptr<User> ReqUser;
         //Verification of autoriztaion
         try
         {
@@ -223,23 +223,40 @@ void Router::RegisterRoutes() {
 
         std::cout << username << " | " << email << " | " << password << std::endl;
 
+        std::cout << "Updating...\n";
         bool isGood = this->_storage.UpdateUser(guid, username, email, password);
+        std::cout << "Updated\n" << isGood << std::endl;
 
-        if (!isGood) {
+        try
+        {
+            std::cout << "\n\n1\n";
+            if (!isGood) {
+                hv::Json response
+                {
+                    { "message", "no user found" }
+                };
+                resp->Json(response);
+                return 404;
+            }
+            std::cout << "2\n";
             hv::Json response
             {
-                { "message", "no user found" }
+                { "message", "success" }
             };
+            std::cout << "3\n";            
             resp->Json(response);
-            return 404;
+            std::cout << "4\n";
+
+            return 200;
         }
-
-        hv::Json response
+        catch(const std::exception& e)
         {
-            { "message", "success" }
-        };
-        resp->Json(response);
-
+            std::cout << "6\n";
+            std::cout << e.what() << '\n';
+            return 400;
+        }
+        
+        std::cout << "5\n";
         return 200;
     });
 

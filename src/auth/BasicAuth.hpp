@@ -4,6 +4,7 @@
 #include <vector>
 #include "base64.hpp"
 #include "../Storage.hpp"
+#include <memory>
 
 
 class BasicAuth {
@@ -12,7 +13,7 @@ private:
 public:
     BasicAuth() = default;
 
-    User* Authorize(const std::string& authorizationString, Storage& storage);
+    std::shared_ptr<User> Authorize(const std::string& authorizationString, Storage& storage);
 
 
 };
