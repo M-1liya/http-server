@@ -136,7 +136,7 @@ void Router::RegisterRoutes() {
         }
         std::cout << "Authorization string = " << authorization << std::endl;
 
-        std::shared_ptr<User> ReqUser;
+        User* ReqUser;
         //Verification of autoriztaion
         try
         {
@@ -184,7 +184,7 @@ void Router::RegisterRoutes() {
             resp->Json(response);
             return 400;
         }
-
+        
         
 
         std::string username;
@@ -246,6 +246,7 @@ void Router::RegisterRoutes() {
             std::cout << "3\n";            
             resp->Json(response);
             std::cout << "4\n";
+
 
             return 200;
         }

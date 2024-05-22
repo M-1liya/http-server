@@ -92,6 +92,7 @@ User* Storage::GetUserByUsername(const std::string& uName) {
 
     std::cout << "Ne nashel" << std::endl;
     return nullptr;
+    
 }
 
 bool Storage::UpdateUser(std::string& guid, const std::string& username, const std::string& email, const std::string& password) {

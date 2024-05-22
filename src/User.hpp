@@ -13,7 +13,7 @@ private:
 public:
     User() = default;
     User(std::string username, std::string email, std::string password);
-
+    ~User();
 
     void ChangeUsername(const std::string& username);
     void ChangeEmail(const std::string& email);

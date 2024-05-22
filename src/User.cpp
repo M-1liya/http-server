@@ -6,6 +6,9 @@ User::User(std::string username, std::string email="user@gmail.com", std::string
 
 }
 
+User::~User()
+{
+}
 
 std::map<std::string, std::string> User::ToJson() {
     return std::map<std::string, std::string> {

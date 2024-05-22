@@ -1,7 +1,7 @@
 #include "BasicAuth.hpp"
 
 
-std::shared_ptr<User> BasicAuth::Authorize(const std::string& authorizationString, Storage& storage)
+User* BasicAuth::Authorize(const std::string& authorizationString, Storage& storage)
 {
     base64 b64_coder = base64();
     
@@ -18,7 +18,7 @@ std::shared_ptr<User> BasicAuth::Authorize(const std::string& authorizationStrin
         // 
         // 
         //
-        std::shared_ptr<User> user ( storage.GetUserByUsername(name_pass[0]));
+        User* user = storage.GetUserByUsername(name_pass[0]);
         if(user == nullptr) std::cout << "aNULL USER" << std::endl;
         std::cout << " here\n";
         user->getUsername();

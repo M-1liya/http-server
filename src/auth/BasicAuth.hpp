@@ -13,7 +13,7 @@ private:
 public:
     BasicAuth() = default;
 
-    std::shared_ptr<User> Authorize(const std::string& authorizationString, Storage& storage);
+    User* Authorize(const std::string& authorizationString, Storage& storage);
 
 
 };
