@@ -12,10 +12,10 @@ User::~User()
 
 std::map<std::string, std::string> User::ToJson() {
     return std::map<std::string, std::string> {
-        std::pair{"username", this->username},
-        std::pair{"email", this->email},
-        std::pair{"password", this->password},
-        std::pair{"role", this->isRoot}
+        std::pair<std::string, std::string>{"username", this->username},
+        std::pair<std::string, std::string>{"email", this->email},
+        std::pair<std::string, std::string>{"password", this->password},
+        std::pair<std::string, std::string>{"role", this->isRoot}
     };
 }
 
