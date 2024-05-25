@@ -8,7 +8,7 @@
 class Router {
 private:
     std::unique_ptr<hv::HttpService> _router;
-    Storage _storage = Storage();
+    Storage _storage ;
     BasicAuth authorizator = BasicAuth();
 
     void RegisterRoutes();
