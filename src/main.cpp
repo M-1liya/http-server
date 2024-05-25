@@ -5,9 +5,9 @@
 int main() {
     std::cout << "Server has been started" << std::endl;
 
-    Router router = Router();
+    Router router;
 
-    Server srv = Server();
+    Server srv;
     srv.Start(8080, router);
 
     return 0;
