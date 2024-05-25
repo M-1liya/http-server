@@ -17,3 +17,10 @@ jobs:
             - run: sudo apt-get update
             - run: sudo apt-get install g++ clang make cmake libboost-all-dev
             - run: mkdir -p build && cd build && cmake .. && make
+            - run: cd ..
+            - run: sh create_debpkg.sh
+            - name: Upload artifact
+              uses: actions/upload-artifact@v3
+              with:
+                name: app
+                path: ./http-server-dcsa.deb
