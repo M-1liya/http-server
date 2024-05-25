@@ -4,9 +4,9 @@ project(http-server)
 
 set(TARGET_NAME "http-server")
 
-set(LIBHV_INCLUDE ${PROJECT_BINARY_DIR}/contrib/libhv/include/hv)
+set(LIBHV_INCLUDE ${PROJECT_BINARY_DIR}/_contrib/libhv/include/hv)
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/contrib)
+add_subdirectory(${PROJECT_SOURCE_DIR}/_contrib)
 
 file(GLOB_RECURSE SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
