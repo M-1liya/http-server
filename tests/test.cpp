@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <hv/HttpClient.h>
-#include "/home/user/projects/http-server/src/auth/base64.hpp"
+#include "../src/auth/base64.hpp"
 #include "requests/request.hpp"
 
 TEST (SmokeTest, SuccessfulGetRequest)
