@@ -28,7 +28,8 @@ jobs:
             - run: mkdir -p build && cd build && cmake .. && make
             - run: cd ..
             - run: sh create_debpkg.sh
-            - run: sh test.sh
+            - name: Tests
+              run: sh test.sh
             - name: Upload artifact
               uses: actions/upload-artifact@v3
               with:
