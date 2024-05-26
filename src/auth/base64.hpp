@@ -1,3 +1,6 @@
+#ifndef BASE_H
+#define BASE_H
+
 
 #include <iostream>
 #include <string>
@@ -19,3 +22,4 @@ public:
     std::string decode(const std::string &in);
 };
 
+#endif // BASE_H

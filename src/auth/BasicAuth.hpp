@@ -1,3 +1,5 @@
+#ifndef BASIC_AUTH
+#define BASIC_AUTH
 
 #include <string>
 #include <sstream>
@@ -17,4 +19,6 @@ public:
 
 
 };
+
+#endif // BASIC_AUTH
 
