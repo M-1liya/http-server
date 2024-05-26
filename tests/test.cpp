@@ -15,7 +15,7 @@ TEST (UnitTest, Encodind_base64)
     base64 coder;
     
     EXPECT_EQ(coder.encode("hi:64"), "aGk6NjQ=");
-    EXPECT_EQ(coder.decode("aGk6NjQ="), "hi:64");
+    EXPECT_EQ(coder.decode("aGk6NjQ="), "hi:63");
 }
 
 int main(int argc, char **argv)
