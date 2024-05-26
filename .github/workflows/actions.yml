@@ -23,8 +23,8 @@ jobs:
                 cd /usr/src/gtest
                 sudo cmake .
                 sudo make
-                sudo cp *.a /usr/lib
-                sudo apt-get install -y libhv-dev
+                cd ..
+                sudo cp -r gtest /usr/lib
             - run: mkdir -p build && cd build && cmake .. && make
             - run: cd ..
             - run: sh create_debpkg.sh
