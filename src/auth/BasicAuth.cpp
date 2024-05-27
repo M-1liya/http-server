@@ -19,7 +19,12 @@ User* BasicAuth::Authorize(const std::string& authorizationString, Storage& stor
         // 
         //
         User* user = storage.GetUserByUsername(name_pass[0]);
-        if(user == nullptr) std::cout << "aNULL USER" << std::endl;
+        if(user == nullptr) 
+        {
+            std::cout << "aNULL USER" << std::endl;
+            return nullptr;
+        }
+
         std::cout << " here\n";
         user->getUsername();
         std::cout << " not here\n";
